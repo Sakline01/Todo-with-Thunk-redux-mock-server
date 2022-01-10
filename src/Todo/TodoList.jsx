@@ -4,12 +4,34 @@ import { removeTodo, toggleTodo } from "../redux/action/todoaction";
 import { getTodos } from "./api";
 
 function TodoItem({ title, status, onDelete, id, onToggle }) {
+  let colour = {
+    color: status ? "green" : "red"
+  };
   return (
-    <div style={{ display: "flex", padding: "1rem", gap: "2rem" }}>
+    <div
+      style={{
+        height: "auto",
+        width: "30%",
+        minWidth: "400px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-around",
+        padding: "1rem",
+        gap: "2rem",
+        border: "blue solid 2px"
+      }}
+    >
       <div>{title}</div>
-      <div>{`${status}`}</div>
-      <button onClick={() => onDelete(id)}>Delete</button>
-      <button onClick={() => onToggle(id)}>Toggle Status</button>
+      <div style={colour}>{`${status}`}</div>
+      <button
+        style={{ color: "white", background: "red" }}
+        onClick={() => onDelete(id)}
+      >
+        Delete
+      </button>
+      <button style={{ background: "#ddf139" }} onClick={() => onToggle(id)}>
+        Toggle Status
+      </button>
     </div>
   );
 }
@@ -37,7 +59,16 @@ function TodoList() {
   };
   console.log(todos);
   return (
-    <div>
+    <div
+      style={{
+        marginTop: "10px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "1rem",
+        justifyContent: "center"
+      }}
+    >
       {isLoading && <h3>Loading...</h3>}
       {isError && <h3> Something went wrong!</h3>}
       {todos.map((item) => (
